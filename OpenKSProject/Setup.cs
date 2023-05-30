@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenKSProject
 {
-    internal class KsHost
+    internal class Setup
     {
     }
 }

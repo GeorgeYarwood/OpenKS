@@ -45,7 +45,14 @@ namespace OpenKSProject
 
         public override void FastUpdate()
         {
-
+            if(currentTicketIndex > CurrentTicketCount)
+            {
+                currentTicketIndex = CurrentTicketCount;
+            }
+            else if(currentTicketIndex < 0)
+            {
+                currentTicketIndex = 0;
+            }
         }
 
         public override void SlowUpdate()
