@@ -8,5 +8,13 @@ namespace OpenKSProject
 {
     internal class Setup
     {
+        //Ask for:
+        //COM PORT
+        //Menu items
+        //IP address(?)
+        //Speaker sound enabled
+        //Late ticket time
+        //Reset stored menu
+        //Refresh menu on clients
     }
 }

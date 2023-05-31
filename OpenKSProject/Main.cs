@@ -3,9 +3,8 @@ using System.Timers;
 
 const int SLOW_UPDATE_TIMER_INTERVAL = 5000;
 
-List<Subsystem> AllSubsystems = new List<Subsystem>();
+List<Subsystem> allSubsystems = new List<Subsystem>();
 SerialisedConfig ksConfig = new SerialisedConfig();
-
 
 System.Timers.Timer SlowUpdateTimer
     = new System.Timers.Timer(SLOW_UPDATE_TIMER_INTERVAL);
@@ -24,16 +23,18 @@ void InitSubsystems()
     InputManager InputManagerInstance = new();
     NetworkManager NetworkManagerInstance = new();
     SerialReader SerialReaderInstance = new();
+    MenuSearch MenuSearchInstance = new();
 
-    AllSubsystems.Add(UiManagerInstance);
-    AllSubsystems.Add(TicketManagerInstance);
-    AllSubsystems.Add(InputManagerInstance);
-    AllSubsystems.Add(NetworkManagerInstance);
-    AllSubsystems.Add(SerialReaderInstance);
+    allSubsystems.Add(UiManagerInstance);
+    allSubsystems.Add(TicketManagerInstance);
+    allSubsystems.Add(InputManagerInstance);
+    allSubsystems.Add(NetworkManagerInstance);
+    allSubsystems.Add(MenuSearchInstance);
+    allSubsystems.Add(SerialReaderInstance);
 
-    for (int s = 0; s < AllSubsystems.Count; s++)
+    for (int s = 0; s < allSubsystems.Count; s++)
     {
-        AllSubsystems[s].Init();
+        allSubsystems[s].Init();
     }
 
     InitTimer();
@@ -53,16 +54,16 @@ void InitTimer()
 
 void FastUpdateSubsystems()
 {
-    for(int s = 0;  s < AllSubsystems.Count; s++)
+    for(int s = 0;  s < allSubsystems.Count; s++)
     {
-        AllSubsystems[s].FastUpdate();
+        allSubsystems[s].FastUpdate();
     }
 }
 
 void SlowUpdateSubsystems(Object _, ElapsedEventArgs E)
 {
-    for (int s = 0; s < AllSubsystems.Count; s++)
+    for (int s = 0; s < allSubsystems.Count; s++)
     {
-        AllSubsystems[s].SlowUpdate();
+        allSubsystems[s].SlowUpdate();
     }
 }

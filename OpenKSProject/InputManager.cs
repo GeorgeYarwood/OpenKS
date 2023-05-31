@@ -14,8 +14,6 @@ namespace OpenKSProject
         const char CURSOR_UP_BUTTON = '8';
         const char CURSOR_DOWN_BUTTON = '2';
 
-        const string TEST_TICKET_NAME = "Vosh's penis";
-
         public override void Init()
         {
             
