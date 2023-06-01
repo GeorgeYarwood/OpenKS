@@ -13,10 +13,12 @@ InitSubsystems();
 
 void InitSubsystems()
 {
-    //TODO Load saved ksConfig
-    //Let user input different menu items and save to database
-    //Try using google doc to store items, sync periodically?
-    //Each time ticket comes through, traverse database and find matching items
+    Setup SetupInstance = new();
+    if (!SetupInstance.HasSetupBeenRun)
+    {
+        SetupInstance.Init();
+        return; //The first time setup must be completed before continuing
+    }
 
     UiManager UiManagerInstance = new();
     TicketManager TicketManagerInstance = new();
@@ -31,6 +33,7 @@ void InitSubsystems()
     allSubsystems.Add(NetworkManagerInstance);
     allSubsystems.Add(MenuSearchInstance);
     allSubsystems.Add(SerialReaderInstance);
+    allSubsystems.Add(SetupInstance);
 
     for (int s = 0; s < allSubsystems.Count; s++)
     {
