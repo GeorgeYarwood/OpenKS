@@ -55,6 +55,8 @@ bool LoadSavedConfig()
     return false;
 }
 
+//TODO GPIO (Ticket beep, bump bar input), Networking between nodes, menu editing
+
 void InitSubsystems()
 {
     bool UpdateSubsytems = false;
