@@ -10,6 +10,7 @@ public enum HOST_DISCOVERY_MODE { IP_ADDRESS, AUTO_DISCOVERY}
 
 namespace OpenKSProject
 {
+    [Serializable]
     internal class SerialisedConfig
     {
         KS_MODE ksMode;
@@ -26,18 +27,25 @@ namespace OpenKSProject
             set { hostDiscoveryMode = value; }
         }
 
-        IPAddress? hostIPAddress;
-        public IPAddress? HostIPAddress
-        {
-            get { return hostIPAddress; }
-            set { hostIPAddress = value; }
-        }
+        //IPAddress? hostIPAddress;
+        //public IPAddress? HostIPAddress
+        //{
+        //    get { return hostIPAddress; }
+        //    set { hostIPAddress = value; }
+        //}
 
-        int? comPort;
-        public int? ComPort
+        string comPort;
+        public string ComPort
         {
             get { return comPort; }
             set { comPort = value; }
+        }
+
+        int? baudRate;
+        public int? BaudRate
+        {
+            get { return baudRate; }
+            set { baudRate = value; }
         }
 
         bool ticketBeepEnabled;
@@ -47,11 +55,11 @@ namespace OpenKSProject
             set { ticketBeepEnabled = value; }
         }
 
-        TimeOnly lateTicketThreshhold;
-        public TimeOnly LateTicketThreshhold
-        {
-            get { return lateTicketThreshhold;}
-            set { lateTicketThreshhold = value; }
-        }
+        //TimeOnly lateTicketThreshhold;
+        //public TimeOnly LateTicketThreshhold
+        //{
+        //    get { return lateTicketThreshhold;}
+        //    set { lateTicketThreshhold = value; }
+        //}
     }
 }

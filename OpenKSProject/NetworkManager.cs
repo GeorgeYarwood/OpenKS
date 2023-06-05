@@ -10,10 +10,18 @@ namespace OpenKSProject
 {
     internal class NetworkManager : Subsystem
     {
-        bool isMasterKs = false;
-        public bool IsMasterKs
+        KS_MODE ksMode;
+        public KS_MODE KsMode
         {
-            get { return isMasterKs;}
+            get { return ksMode; }
+            set { ksMode = value; }
+        }
+
+        HOST_DISCOVERY_MODE hostDiscoveryMode;
+        public HOST_DISCOVERY_MODE HostDiscoveryMode
+        {
+            get { return hostDiscoveryMode; }
+            set { hostDiscoveryMode = value; }
         }
 
         static NetworkManager instance;
@@ -36,10 +44,10 @@ namespace OpenKSProject
 
         public override void SlowUpdate()
         {
-            if(!isMasterKs)
-            {
-                SyncWithMaster();
-            }
+            //if(!isMasterKs)
+            //{
+            //    SyncWithMaster();
+            //}
         }
 
         void SyncWithMaster()
