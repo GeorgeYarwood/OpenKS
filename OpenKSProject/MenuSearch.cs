@@ -6,31 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenKSProject
 {
-    internal class MenuSearch : Subsystem
+    //Instead of constantly polling the database, we traverse this and update from database when nessacary
+    internal class MenuSearch
     {
-        static MenuSearch instance;
-        public static MenuSearch Instance
-        {
-            get { return instance; }
-        }
-
-        List<MenuItem> runtimemenu = new List<MenuItem>();
-        public List<MenuItem> RuntimeMenu
-        {
-            get { return runtimemenu; }
-        }
-
-        public override void Init()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                return;
-            }
-        }
-
+        public static List<MenuItem> runtimeMenu = new List<MenuItem>();
     }
 }

@@ -34,60 +34,13 @@ namespace OpenKSProject
         SerialPort ticketInputPort;
 
         //SQL server settings
-        const string sqlQuery = "SELECT MENUITEM FROM [Table]";
 
-        const string sqlConnection= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=F:\OpenKs\OpenKSProject\Menu.mdf;Integrated Security=True";
-                                       
-
+                                   
         SqlConnection? sqlClient;
 
         public override void Init()
         {
             SetupSerialPort();
-            UpdateRuntimeMenu();
-        }
-
-        void SetupSqlConnection(bool Connect)
-        {
-            if (sqlClient == null)
-            {
-                sqlClient = new SqlConnection(sqlConnection);
-            }
-
-            if (Connect)
-            {
-                if (sqlClient.State == System.Data.ConnectionState.Closed)
-                {
-                    sqlClient.Open();
-                }
-
-                SqlCommand TestCommand = new SqlCommand("INSERT INTO [Table] (MenuItem) VALUES ('Kids nuggets')", sqlClient);
-                //TestCommand.Parameters.Add("@menuItemName", SqlDbType.Text).Value = "Bowl Chips";
-                TestCommand.ExecuteNonQuery();
-            }
-            else
-            {
-                if (sqlClient.State == System.Data.ConnectionState.Open)
-                {
-                    sqlClient.Close();
-                }
-            }
-        }
-
-        void UpdateRuntimeMenu()
-        {
-            SetupSqlConnection(true);
-            SqlCommand SearchCommand = new SqlCommand(sqlQuery, sqlClient);
-            SqlDataReader Reader = SearchCommand.ExecuteReader();
-            MenuSearch.Instance.RuntimeMenu.Clear();
-            while (Reader.Read())
-            {
-                MenuItem ImportedItem = new MenuItem();
-                ImportedItem.ItemName = Reader["MENUITEM"].ToString();
-
-                MenuSearch.Instance.RuntimeMenu.Add(ImportedItem);
-            }
-            Reader.Close();
         }
 
         [STAThread]
@@ -120,9 +73,9 @@ namespace OpenKSProject
             //If EXACT match
             //Break out/add ticket with name
 
-            for (int mi = 0; mi < MenuSearch.Instance.RuntimeMenu.Count; mi++)
+            for (int mi = 0; mi < MenuSearch.runtimeMenu.Count; mi++)
             {
-                CurrentMenuItem = MenuSearch.Instance.RuntimeMenu[mi].ItemName;
+                CurrentMenuItem = MenuSearch.runtimeMenu[mi].ItemName;
                 CurrentMenuItem = CurrentMenuItem.ToLower();
                 for (int c = 0; c < Output.Length; c++)
                 {

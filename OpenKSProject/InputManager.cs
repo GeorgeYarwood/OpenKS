@@ -14,9 +14,28 @@ namespace OpenKSProject
         const char CURSOR_UP_BUTTON = '8';
         const char CURSOR_DOWN_BUTTON = '2';
 
+        bool useKeyInput;
+        public bool UseKeyInput
+        {
+            set { useKeyInput = value; }
+        }
+
+        static InputManager instance;
+        public static InputManager Instance
+        {
+            get { return instance; }
+        }
+
         public override void Init()
         {
-            
+            if(instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                return;
+            }
         }
 
         public override void SlowUpdate()
@@ -26,6 +45,11 @@ namespace OpenKSProject
 
         public override void FastUpdate()
         {
+            if (!useKeyInput)
+            {
+                return;
+            }
+
             char UserInput = Console.ReadKey().KeyChar;
             //if (UserInput == ADD_TICKET_BUTTON)
             //{
@@ -41,16 +65,36 @@ namespace OpenKSProject
 
             if (UserInput == CURSOR_UP_BUTTON)
             {
-                TicketManager.Instance.MoveUpTicketIndex();
+                MoveUpTicket();
             }
             if (UserInput == CURSOR_DOWN_BUTTON)
             {
-                TicketManager.Instance.MoveDownTicketIndex();
+                MoveDownTicket();
             }
             if (UserInput == CLEAR_TICKET_BUTTON)
             {
-                TicketManager.Instance.ClearTicket();
+                ClearTicket();
             }
+        }
+
+        public void ClearTicket()
+        {
+            TicketManager.Instance.ClearTicket();
+        }
+
+        public void MoveUpTicket() 
+        {
+            TicketManager.Instance.MoveUpTicketIndex();
+        }
+
+        public void MoveDownTicket()
+        {
+            TicketManager.Instance.MoveDownTicketIndex();
+        }
+
+        public void OpenCloseMenu()
+        {
+            //TODO this
         }
     }
 }

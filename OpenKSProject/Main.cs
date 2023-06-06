@@ -24,7 +24,9 @@ void SaveCurrentConfig()
     try
     {
         Stream SavedFile = new FileStream(CONFIG_FILE_PATH, FileMode.Create);
+#pragma warning disable SYSLIB0011 // Type or member is obsolete
         ThisFormatter.Serialize(SavedFile, ksConfig);
+#pragma warning restore SYSLIB0011 // Type or member is obsolete
         SavedFile.Close();
     }
     catch
@@ -43,7 +45,9 @@ bool LoadSavedConfig()
         Stream SavedFile = new FileStream(CONFIG_FILE_PATH, FileMode.Open, FileAccess.Read);
         if (SavedFile != null)
         {
+#pragma warning disable SYSLIB0011 // Type or member is obsolete
             ksConfig = (SerialisedConfig)ThisFormatter.Deserialize(SavedFile);
+#pragma warning restore SYSLIB0011 // Type or member is obsolete
             SavedFile.Close();
             return true;
         }
@@ -55,7 +59,7 @@ bool LoadSavedConfig()
     return false;
 }
 
-//TODO GPIO (Ticket beep, bump bar input), Networking between nodes, menu editing
+//TODO Networking between nodes, menu editing
 
 void InitSubsystems()
 {
@@ -85,10 +89,12 @@ void InitSubsystems()
     InputManager InputManagerInstance = new();
     NetworkManager NetworkManagerInstance = new();
     SerialReader SerialReaderInstance = new();
-    MenuSearch MenuSearchInstance = new();
+    MenuEditor MenuEditorInstance = new();
     HardwareManager HardwareManagerInstance = new();
 
-    if(UpdateSubsytems)
+    MenuSearch MenuSearchInstance = new(); //Not a subsystem
+
+    if (UpdateSubsytems)
     {
         //Network
         NetworkManagerInstance.KsMode = ksConfig.KsMode;
@@ -116,7 +122,7 @@ void InitSubsystems()
     allSubsystems.Add(TicketManagerInstance);
     allSubsystems.Add(InputManagerInstance);
     allSubsystems.Add(NetworkManagerInstance);
-    allSubsystems.Add(MenuSearchInstance);
+    allSubsystems.Add(MenuEditorInstance);
     allSubsystems.Add(SerialReaderInstance);
     allSubsystems.Add(HardwareManagerInstance);
 
